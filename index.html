@@ -14,7 +14,7 @@
 <section id="comunity"></section>
 
 <style>
-   {
+  * {
     margin: 0;
     padding: 0;
     border: none;
@@ -90,8 +90,8 @@ nav {
 }
 
 nav span {
-    color: #FF4754;
-    font-weight: 700;
+    color: #fff;
+    font-weight: 600;
 }
 
 nav ul {
@@ -109,3 +109,19 @@ nav._fixed {
     padding: 24px 40px;
 }
 </style>
+<script>
+	let isTransparent = true;
+const nav = document.querySelector('nav');
+
+window.addEventListener('scroll', event => {
+    if (window.pageYOffset > 70 && isTransparent) {
+        nav.classList.add('_fixed');
+        isTransparent = false;
+    }
+
+    if (window.pageYOffset <= 70 && !isTransparent) {
+        nav.classList.remove('_fixed');
+        isTransparent = true;
+    }
+});
+</script>
