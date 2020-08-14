@@ -10,7 +10,12 @@
   </ul>
 </nav>
 
-<section id="home"></section>
+<section id="home">
+	</br></br></br></br></br></br></br></br></br></br>
+    <h1>Seguidores:</h1></br>
+	<span id="followers">...</span>
+</section>
+
 <section id="comunity"></section>
 
 <style>
@@ -27,6 +32,7 @@ html {
 
 body {
     font-family: 'Open Sans', sans-serif;
+    background: #2C2B33;
 }
 
 a {
@@ -52,6 +58,7 @@ section {
     background-size: cover;
 
     position: relative;
+    text-align: center;
 }
 
 #home::before {
@@ -108,6 +115,51 @@ nav._fixed {
     background: #121212;
     padding: 24px 40px;
 }
+
+
+<style type="text/css">
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #a0a0a0;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+#followers {
+    color: #000;
+
+    font-size: 14rem;
+    font-weight: 600;
+    user-select: none;
+}
+
 </style>
 <script>
 	let isTransparent = true;
@@ -124,4 +176,20 @@ window.addEventListener('scroll', event => {
         isTransparent = true;
     }
 });
+
+const followers = document.getElementById('followers');
+
+async function getFollowers(profileId) {
+    const url      = `https://instagram.com/${profileId}/?__a=1`;
+    const response = await fetch(url);
+    const data     = await response.json();
+
+    return data.graphql.user.edge_followed_by.count;
+}
+
+async function setFollowers(profileId) {
+    followers.textContent = await getFollowers(profileId);
+}
+
+setInterval(() => setFollowers('honkcode'), 1000);
 </script>
