@@ -1,0 +1,24 @@
+<body bgcolor="B84139">
+	<center>
+    	<h1>HONKCLOCK</h1></br>
+        <p class="clock">00:00:00</p>
+    </center>
+</body>
+
+<script>
+	setInterval(function(){
+    	d = new Date();
+    	var time = "";
+    	
+    	var h;
+    	var m;
+    	var s;
+    	
+    	if(d.getHours().toString.length == 2){h = d.getHours();}else{h = "0" + d.getHours();}
+        if(d.getMinutes().toString.length == 2){m = d.getMinutes();}else{m = "0" + d.getMinutes();}
+        if(d.getSeconds().toString.length == 2){s = d.getSeconds();}else{s = "0" + d.getSeconds();}
+    	
+    	time = h + ":" + m + ":" + s;
+    	document.getElementsByClassName("clock")[0].innerHTML = time;
+    }, 100)
+</script>
