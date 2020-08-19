@@ -2,10 +2,13 @@
 	<center>
     	<h1>HONKCLOCK</h1></br>
         <p class="clock">00:00:00</p>
+        <button class="mode" onclick="switchMode()" href="#">Switch to AM/PM mode</button>
     </center>
 </body>
 
 <script>
+	var AmPm = false;
+	
 	setInterval(function(){
     	d = new Date();
     	var time = "";
@@ -17,8 +20,31 @@
     	if(d.getHours().toString().length == 2){h = d.getHours();}else{h = "0" + d.getHours();}
         if(d.getMinutes().toString().length == 2){m = d.getMinutes();}else{m = "0" + d.getMinutes();}
         if(d.getSeconds().toString().length == 2){s = d.getSeconds();}else{s = "0" + d.getSeconds();}
+        
+        if(AmPm){
+        	if(d.getHours() > 12){
+            	h = h-12;
+    			time = h + ":" + m + ":" + s + " PM";
+            }
+            else{
+            	time = h + ":" + m + ":" + s + " AM";
+            }
+        }
+        else{
+        	time = h + ":" + m + ":" + s;
+        }
     	
-    	time = h + ":" + m + ":" + s;
     	document.getElementsByClassName("clock")[0].innerHTML = time;
     }, 100)
+    
+    function switchMode(){
+    	if(AmPm){
+        	AmPm = false;
+            document.getElementsByClassName("mode")[0].innerHTML = "Switch to AM/PM mode";
+        }
+        else{
+        	AmPm = true;
+            document.getElementsByClassName("mode")[0].innerHTML = "Switch to 24h mode";
+        }
+    }
 </script>
