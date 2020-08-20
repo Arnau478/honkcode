@@ -1,0 +1,9 @@
+<form method="post" action="contact.php">
+    <textarea name="message"></textarea>
+    <input type="submit">
+</form>
+<?php
+if($_POST["message"]) {
+    mail("arnauxabia@gmail.com", "Form to email message", $_POST["message"], "From: an@email.address");
+}
+?>
